@@ -1,3 +1,8 @@
+## ERD
+![Screen Shot 2022-04-30 at 3 33 00 PM](https://user-images.githubusercontent.com/90972554/166120337-744bc726-6a78-4fa7-b838-355290dd454a.png)
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
