@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './donor/donor.module';
+import { DonorModule } from './donor/donor.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
       autoLoadEntities: true,
       synchronize: true, //remove for production!!
      }),
-    UserModule,
+    DonorModule,
     AuthModule,
   ],
   controllers: [AppController],

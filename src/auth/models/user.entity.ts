@@ -17,10 +17,10 @@ export class UserEntity{
     lastName: string;
 
     @Column({ unique: true })
-    email:string;
+    email: string;
 
-    @Column()
-    password:string;
+    @Column({ select: false })
+    password: string;
 
     @Column({ type: 'enum', enum: Role, default: Role.USER })
     role: Role;

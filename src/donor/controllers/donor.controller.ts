@@ -5,18 +5,13 @@ import { UpdateResult, DeleteResult } from 'typeorm';
 import { DonorService } from '../services/donor.service'
 import { DonorStatus } from '../models/donor.interface'
 
-@Controller('user')
+@Controller('donor')
 export class DonorController {
-    constructor(private donorService: donorService){}
+    constructor(private donorService: DonorService){}
 
     @Post()
     create(@Body() donorStatus: DonorStatus): Observable<DonorStatus> {
-        return this.donorService.createUser(donorStatus)
-    }
-
-    @Get()
-    findAll():Observable<DonorStatus[]> {
-        return this.donorService.findAllUsers();
+        return this.donorService.createDonor(donorStatus)
     }
 
     @Put('edit/:id')
@@ -24,13 +19,13 @@ export class DonorController {
         @Param('id') id: number,
         @Body() donorStatus: DonorStatus
     ):Observable<UpdateResult> {
-        return this.donorService.updateUser(id, donorStatus)
+        return this.donorService.updateDonor(id, donorStatus)
     }
 
-    @Delete(':id')
+    @Delete('delete/:id')
     delete(
         @Param('id') id: number,
     ): Observable<DeleteResult>  {
-        return this.donorService.deleteUser(id)
+        return this.donorService.deleteDonor(id)
     }
 }
