@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import * as bcrypt from 'bcrypt';
@@ -11,6 +12,7 @@ import { User } from '../models/user.interface';
 export class AuthService {
     constructor(@InjectRepository(UserEntity) 
     private readonly userRepository: Repository<UserEntity>,
+    private jwtService: JwtService
     ) {
 
     }
@@ -41,4 +43,39 @@ export class AuthService {
         )
     }
 
+    validateUser(email: string, password: string): Observable<User> {
+        return from(
+            this.userRepository.findOne({
+                // { email: email },
+                 select: ['id', 'firstName', 'lastName', 'email', 'password', 'role', 'type_user'],
+                 where: { email },
+            // }
+                //According to tutorial, this was supposed to be 'findOne', but it didn't like both arguments...or just the first argument. Good luck.
+                
+            })
+        ).pipe(
+            switchMap((user: User) => 
+            from(bcrypt.compare(password, user.password)).pipe(
+                map((isValidPassword: boolean) => {
+                    if (isValidPassword) {
+                        delete user.password;
+                        return user;
+                    }
+                }),
+            ),
+            ),
+        );
+    }
+
+    login(user: User): Observable<string> {
+        const { email, password } = user;
+        return this.validateUser(email, password).pipe(
+            switchMap((user: User) => {
+                if (user) {
+                    //create JWT - credentials
+                    return from(this.jwtService.signAsync({ user }))
+                }
+            }),
+        );
+    }
 }
