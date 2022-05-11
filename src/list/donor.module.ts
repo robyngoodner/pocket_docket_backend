@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { DonorService } from './services/donor.service';
-import { DonorController } from './controllers/donor.controller';
+import { DonorService } from './services/list.service';
+import { DonorController } from './controllers/list.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DonorEntity } from './models/donor.entity';
+import { DonorEntity } from './models/list.entity';
 
 @Module({
   imports : [

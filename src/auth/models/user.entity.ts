@@ -1,9 +1,8 @@
-import { DonorEntity } from "src/donor/models/donor.entity";
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from "typeorm";
 
 import { Role } from './role.enum'
-import { UserType } from "./userType.enum";
 
+import { ListEntity } from '../../list/models/list.entity'
 
 @Entity('user')
 export class UserEntity{
@@ -28,11 +27,8 @@ export class UserEntity{
     @Column( {type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
-    @Column({ type: 'enum', enum: UserType })
-    type_user: UserType;
-
-    @OneToOne(() => DonorEntity, donor => donor.user)
-    user_type: DonorEntity;
+    @OneToOne(() => ListEntity, list => list.user)
+    list: ListEntity;
 
 
 }

@@ -17,6 +17,13 @@ export class DonorService {
         return from(this.donorStatusRepository.save(donorStatus));
     }
 
+    getDonor(id: number): Observable<DonorStatus> {
+        return from(
+            this.donorStatusRepository.findOne({
+                where: { id }
+            }))
+    }
+
     updateDonor(id: number, donorStatus: DonorStatus): Observable<UpdateResult> {
         return from(this.donorStatusRepository.update(id, donorStatus))
     }

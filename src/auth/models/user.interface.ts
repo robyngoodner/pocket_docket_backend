@@ -1,4 +1,4 @@
-import { DonorEntity } from "src/donor/models/donor.entity";
+import { DonorEntity } from "src/list/models/list.entity";
 import { Role } from "./role.enum";
 import { UserType } from "./userType.enum";
 

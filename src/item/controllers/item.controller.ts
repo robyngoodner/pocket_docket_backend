@@ -14,6 +14,11 @@ export class DonorController {
         return this.donorService.createDonor(donorStatus)
     }
 
+    @Get ('/:id')
+    findOne(@Param('id') id: number) {
+        return this.donorService.getDonor(id)
+    }
+
     @Put('edit/:id')
     update(
         @Param('id') id: number,

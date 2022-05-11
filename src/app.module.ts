@@ -3,8 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DonorModule } from './donor/donor.module';
+import { DonorModule } from './list/donor.module';
 import { AuthModule } from './auth/auth.module';
+import { ToDoItemModule } from './item/item.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
      }),
     DonorModule,
     AuthModule,
+    ToDoItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -44,17 +44,16 @@ export class AuthService {
     }
 
     validateUser(email: string, password: string): Observable<User> {
+        console.log('password',email)
         return from(
             this.userRepository.findOne({
-                // { email: email },
                  select: ['id', 'firstName', 'lastName', 'email', 'password', 'role', 'type_user'],
-                 where: { email },
-            // }
-                //According to tutorial, this was supposed to be 'findOne', but it didn't like both arguments...or just the first argument. Good luck.
-                
+                 where: { email },                
             })
+
         ).pipe(
             switchMap((user: User) => 
+           
             from(bcrypt.compare(password, user.password)).pipe(
                 map((isValidPassword: boolean) => {
                     if (isValidPassword) {
@@ -63,12 +62,15 @@ export class AuthService {
                     }
                 }),
             ),
-            ),
+        
+        ),
         );
     }
 
     login(user: User): Observable<string> {
-        const { email, password } = user;
+        console.log("auth.service back end line 75", user)
+        const { email, password }: User = user;
+        console.log('line 77 email', user.email)
         return this.validateUser(email, password).pipe(
             switchMap((user: User) => {
                 if (user) {
@@ -77,5 +79,36 @@ export class AuthService {
                 }
             }),
         );
+    };
+
+    findOne(email: string): Observable<User> {
+        console.log('email auth.service line 85: ',email)
+        return from(
+            this.userRepository.findOne({
+                 select: ['id', 'firstName', 'lastName', 'email', 'password', 'role', 'type_user'],
+                where: { email },                
+            }
+            )
+            
+        )
+    };
+
+    update(email: string): Observable<User> {
+        return from(
+            this.userRepository.save({ 
+                email: email, 
+                select: ['firstName', 'lastName', 'email', 'password']
+            }))
     }
+
+    destroy(email: string){
+        console.log('email auth.service line 97: ', email)
+        return from(
+            this.userRepository.delete ({ email
+            })
+            )
+    }
+
+
+
 }
