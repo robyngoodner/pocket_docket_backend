@@ -3,32 +3,32 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { Repository, UpdateResult, DeleteResult,  } from 'typeorm';
 
-import { DonorEntity } from '../models/donor.entity'
-import { DonorStatus } from '../models/donor.interface'
+import { ItemEntity } from '../models/item.entity'
+import { Item } from '../models/item.interface'
 
 @Injectable()
-export class DonorService {
+export class ItemService {
     constructor(
-        @InjectRepository(DonorEntity)
-        private readonly donorStatusRepository:Repository<DonorEntity>
+        @InjectRepository(ItemEntity)
+        private readonly itemRepository:Repository<ItemEntity>
     ) {}
 
-    createDonor(donorStatus: DonorStatus): Observable<DonorStatus> {
-        return from(this.donorStatusRepository.save(donorStatus));
+    createItem(item: Item): Observable<Item> {
+        return from(this.itemRepository.save(item));
     }
 
-    getDonor(id: number): Observable<DonorStatus> {
+    getItem(id: number): Observable<Item> {
         return from(
-            this.donorStatusRepository.findOne({
+            this.itemRepository.findOne({
                 where: { id }
             }))
     }
 
-    updateDonor(id: number, donorStatus: DonorStatus): Observable<UpdateResult> {
-        return from(this.donorStatusRepository.update(id, donorStatus))
+    updateItem(id: number, item: Item): Observable<UpdateResult> {
+        return from(this.itemRepository.update(id, item))
     }
 
-    deleteDonor(id: number): Observable<DeleteResult> {
-        return from(this.donorStatusRepository.delete(id));
+    deleteItem(id: number): Observable<DeleteResult> {
+        return from(this.itemRepository.delete(id));
     }
 }

@@ -22,7 +22,7 @@ export class AuthService {
     }
 
     registerAccount(user: User): Observable<User> {
-        const { firstName, lastName, email, password, type_user } = user;
+        const { firstName, lastName, email, password } = user;
 
         return this.hashPassword(password).pipe(
             switchMap((hashedPassword: string) => {
@@ -31,7 +31,6 @@ export class AuthService {
                     lastName,
                     email,
                     password: hashedPassword,
-                    type_user
                 })).pipe(
                     map((user: User) => {
                         //returns all data from Observable
@@ -47,7 +46,7 @@ export class AuthService {
         console.log('password',email)
         return from(
             this.userRepository.findOne({
-                 select: ['id', 'firstName', 'lastName', 'email', 'password', 'role', 'type_user'],
+                 select: ['id', 'firstName', 'lastName', 'email', 'password'],
                  where: { email },                
             })
 
@@ -68,9 +67,9 @@ export class AuthService {
     }
 
     login(user: User): Observable<string> {
-        console.log("auth.service back end line 75", user)
+        //console.log("auth.service back end line 75", user)
         const { email, password }: User = user;
-        console.log('line 77 email', user.email)
+        //console.log('line 77 email', user.email)
         return this.validateUser(email, password).pipe(
             switchMap((user: User) => {
                 if (user) {
@@ -85,7 +84,7 @@ export class AuthService {
         console.log('email auth.service line 85: ',email)
         return from(
             this.userRepository.findOne({
-                 select: ['id', 'firstName', 'lastName', 'email', 'password', 'role', 'type_user'],
+                 select: ['id', 'firstName', 'lastName', 'email', 'password', 'lists'],
                 where: { email },                
             }
             )

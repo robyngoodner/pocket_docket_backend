@@ -2,35 +2,36 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { from, Observable } from 'rxjs';
 import { UpdateResult, DeleteResult } from 'typeorm';
 
-import { DonorService } from '../services/list.service'
-import { DonorStatus } from '../models/list.interface'
+import { ListService } from '../services/list.service'
+import { List } from '../models/list.interface'
 
-@Controller('donor')
-export class DonorController {
-    constructor(private donorService: DonorService){}
+@Controller('list')
+export class ListController {
+    constructor(private listService: ListService){}
 
-    @Post()
-    create(@Body() donorStatus: DonorStatus): Observable<DonorStatus> {
-        return this.donorService.createDonor(donorStatus)
+    @Post('new')
+    create(@Body() list: List): Observable<List> {
+        console.log('list controller creating new list line 14')
+        return this.listService.createList(list)
     }
 
-    @Get ('/:id')
-    findOne(@Param('id') id: number) {
-        return this.donorService.getDonor(id)
+    @Get (':id')
+    findAll(@Param('user') id: number) {
+        return this.listService.getLists(id)
     }
 
-    @Put('edit/:id')
+    @Put(':id/edit')
     update(
         @Param('id') id: number,
-        @Body() donorStatus: DonorStatus
-    ):Observable<UpdateResult> {
-        return this.donorService.updateDonor(id, donorStatus)
+        @Body() list: List
+    ):Observable<List> {
+        return this.listService.updateList(id)
     }
 
-    @Delete('delete/:id')
+    @Delete(':id/delete')
     delete(
         @Param('id') id: number,
     ): Observable<DeleteResult>  {
-        return this.donorService.deleteDonor(id)
+        return this.listService.deleteList(id)
     }
 }

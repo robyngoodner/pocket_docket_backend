@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
 import { UserEntity } from '../../auth/models/user.entity';
 import { ItemEntity } from '../../item/models/item.entity';
@@ -9,13 +9,17 @@ export class ListEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => UserEntity, user => user.list)
-    @JoinColumn()
+    @ManyToOne(type => UserEntity, user => user.id)
     user: UserEntity;
 
-    @ManyToMany(() => ItemEntity)
-    @JoinColumn()
-    toDoItems: ItemEntity[];
+    @OneToMany(type => ItemEntity, item => item.id)
+    items: ItemEntity[];
+
+    @Column()
+    title: string;
+
+    @Column()
+    description: string;
 
 
     @Column( {type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

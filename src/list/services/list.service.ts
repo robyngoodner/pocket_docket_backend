@@ -1,34 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { from, Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { Repository, UpdateResult, DeleteResult,  } from 'typeorm';
 
-import { DonorEntity } from '../models/list.entity'
-import { DonorStatus } from '../models/list.interface'
+import { ListEntity } from '../models/list.entity'
+import { List } from '../models/list.interface'
 
 @Injectable()
-export class DonorService {
+export class ListService {
     constructor(
-        @InjectRepository(DonorEntity)
-        private readonly donorStatusRepository:Repository<DonorEntity>
+        @InjectRepository(ListEntity)
+        private readonly listRepository:Repository<ListEntity>
     ) {}
 
-    createDonor(donorStatus: DonorStatus): Observable<DonorStatus> {
-        return from(this.donorStatusRepository.save(donorStatus));
+    createList(list: List): Observable<List> {
+        const { user, title, description } = list
+        console.log("list.service on back end creating new list: ",list)
+        return from(this.listRepository.save({user, title, description})).pipe(
+            map((list: List) => {
+                return list
+            })
+        );
     }
 
-    getDonor(id: number): Observable<DonorStatus> {
-        return from(
-            this.donorStatusRepository.findOne({
-                where: { id }
+    getLists(id: number) {
+        return (
+            this.listRepository.find({
+                select: ['title', 'description', 'items', 'user'],
             }))
     }
 
-    updateDonor(id: number, donorStatus: DonorStatus): Observable<UpdateResult> {
-        return from(this.donorStatusRepository.update(id, donorStatus))
+    updateList(id: number): Observable<List> {
+        return from(
+            this.listRepository.save({
+            id, 
+            select: ['title', 'description']
+        }))
     }
 
-    deleteDonor(id: number): Observable<DeleteResult> {
-        return from(this.donorStatusRepository.delete(id));
+    deleteList(id: number): Observable<DeleteResult> {
+        return from(this.listRepository.delete(id));
     }
 }

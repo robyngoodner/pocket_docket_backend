@@ -1,12 +1,12 @@
-import { ForeignKeyMetadata } from "typeorm/metadata/ForeignKeyMetadata";
-
 import { UserEntity } from '../../auth/models/user.entity'
+import { ListEntity } from "src/list/models/list.entity";
 
-export interface DonorStatus {
+export interface Item {
     id?: number;
     user?: UserEntity;
-    donationOptionOne?: number;
-    donationOptionTwo?: number;
-    donationOptionThree?: number;
+    list: ListEntity;
+    title?: string;
+    body?: string;
     created_at?: Date;
 }
+

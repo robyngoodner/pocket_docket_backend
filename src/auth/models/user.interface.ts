@@ -1,17 +1,13 @@
-import { DonorEntity } from "src/list/models/list.entity";
-import { Role } from "./role.enum";
-import { UserType } from "./userType.enum";
+import { ListEntity } from "src/list/models/list.entity";
 
 
 
 export interface User {
     id?: number;
-    firstName?: string;
-    lastName?: string;
     email: string;
     password: string;
-    role?: Role;
+    firstName?: string;
+    lastName?: string;
     createdAt?: Date;
-    type_user?: UserType;
-    user_type?: DonorEntity;
+    list?: ListEntity;
 }

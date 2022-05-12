@@ -3,9 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DonorModule } from './list/donor.module';
+import { ListModule } from './list/list.module';
 import { AuthModule } from './auth/auth.module';
-import { ToDoItemModule } from './item/item.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
   imports: [
@@ -20,9 +20,9 @@ import { ToDoItemModule } from './item/item.module';
       autoLoadEntities: true,
       synchronize: true, //remove for production!!
      }),
-    DonorModule,
+    ListModule,
     AuthModule,
-    ToDoItemModule,
+    ItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],
