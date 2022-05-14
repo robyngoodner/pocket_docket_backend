@@ -14,6 +14,11 @@ export class ItemController {
         return this.itemService.createItem(item)
     }
 
+    @Get ('/:id')
+    findAll(@Param('list') id: number) {
+        return this.itemService.getItems(id)
+    }
+
     @Put('edit/:id')
     update(
         @Param('id') id: number,

@@ -13,6 +13,7 @@ export class ListEntity {
     user: UserEntity;
 
     @OneToMany(type => ItemEntity, item => item.id)
+    @JoinColumn()
     items: ItemEntity[];
 
     @Column()

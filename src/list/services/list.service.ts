@@ -30,6 +30,14 @@ export class ListService {
             }))
     }
 
+    getList(id: number): Observable<List> {
+        return from(
+            this.listRepository.findOne({ 
+                where: {id: id},
+                select: ['title', 'description', 'id', 'items']})
+        )
+    }
+
     updateList(id: number): Observable<List> {
         return from(
             this.listRepository.save({

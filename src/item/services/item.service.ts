@@ -17,11 +17,14 @@ export class ItemService {
         return from(this.itemRepository.save(item));
     }
 
-    getItem(id: number): Observable<Item> {
-        return from(
-            this.itemRepository.findOne({
-                where: { id }
-            }))
+    getItems(id: number){
+        console.log('item service line 21', id)
+        return (
+            this.itemRepository.find({ 
+                where: {id: id},
+                select: ['body']
+            })
+            )
     }
 
     updateItem(id: number, item: Item): Observable<UpdateResult> {
