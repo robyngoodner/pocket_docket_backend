@@ -42,12 +42,8 @@ export class ListService {
         )
     }
 
-    updateList(id: number): Observable<List> {
-        return from(
-            this.listRepository.save({
-            id, 
-            select: ['title', 'description']
-        }))
+    updateList(id: number, list: List): Observable<UpdateResult> {
+        return from(this.listRepository.update( id, list))
     }
 
     deleteList(id: number): Observable<DeleteResult> {

@@ -30,7 +30,7 @@ export class ListController {
         @Param('id') id: number,
         @Body() list: List
     ):Observable<List> {
-        return this.listService.updateList(id)
+        return this.listService.updateList(id, list)
     }
 
     @Delete(':id/delete')

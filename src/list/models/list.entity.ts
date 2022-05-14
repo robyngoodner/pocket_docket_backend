@@ -22,6 +22,9 @@ export class ListEntity {
     @Column()
     description: string;
 
+    @Column({nullable: true})
+    complete: boolean;
+
 
     @Column( {type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
