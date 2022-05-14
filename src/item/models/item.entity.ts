@@ -17,6 +17,9 @@ export class ItemEntity {
     @Column({nullable: false})
     body: string;
 
+    @Column({nullable: true})
+    complete: boolean;
+
     @Column( {type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' , nullable: false})
     createdAt: Date;
 

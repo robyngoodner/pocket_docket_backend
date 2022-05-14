@@ -7,6 +7,7 @@ export interface Item {
     user?: UserEntity;
     list?: ListEntity;
     body?: string;
+    complete?: boolean;
     created_at?: Date;
 }
 

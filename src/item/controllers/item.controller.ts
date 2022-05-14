@@ -19,7 +19,7 @@ export class ItemController {
         return this.itemService.getItems(id)
     }
 
-    @Put('edit/:id')
+    @Put(':id/edit')
     update(
         @Param('id') id: number,
         @Body() item: Item
