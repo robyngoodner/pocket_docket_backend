@@ -5,7 +5,6 @@ export interface Item {
     id?: number;
     user?: UserEntity;
     list: ListEntity;
-    title?: string;
     body?: string;
     created_at?: Date;
 }

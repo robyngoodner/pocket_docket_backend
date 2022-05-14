@@ -15,9 +15,6 @@ export class ItemEntity {
     list: ListEntity
 
     @Column()
-    title: string;
-
-    @Column()
     body: string;
 
     @Column( {type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

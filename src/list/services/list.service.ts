@@ -26,7 +26,7 @@ export class ListService {
     getLists(id: number) {
         return (
             this.listRepository.find({
-                select: ['title', 'description', 'items', 'user'],
+                select: ['title', 'description', 'id', 'items', 'user'],
             }))
     }
 

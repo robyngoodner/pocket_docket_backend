@@ -5,18 +5,13 @@ import { UpdateResult, DeleteResult } from 'typeorm';
 import { ItemService } from '../services/item.service'
 import { Item } from '../models/item.interface'
 
-@Controller('donor')
+@Controller('item')
 export class ItemController {
     constructor(private itemService: ItemService){}
 
-    @Post()
+    @Post('/new')
     create(@Body() item: Item): Observable<Item> {
         return this.itemService.createItem(item)
-    }
-
-    @Get ('/:id')
-    findOne(@Param('id') id: number) {
-        return this.itemService.getItem(id)
     }
 
     @Put('edit/:id')
