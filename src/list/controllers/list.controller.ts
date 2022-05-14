@@ -21,7 +21,7 @@ export class ListController {
     }
 
     @Get (':id')
-    findAll(@Param('user') id: number) {
+    find( @Param('id') id: number) {
         return this.listService.getLists(id)
     }
 

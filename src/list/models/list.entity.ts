@@ -9,8 +9,9 @@ export class ListEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => UserEntity, user => user.id)
+    @ManyToOne(() => UserEntity, user => user.lists)
     user: UserEntity;
+
 
     @OneToMany(() => ItemEntity, item => item.list)
     items: ItemEntity[];

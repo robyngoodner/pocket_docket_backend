@@ -22,9 +22,8 @@ export class UserEntity{
     @Column( {type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
-    @OneToMany(type => ListEntity, list => list.user)
-    @JoinColumn({name: "list_id"})
-    lists: ListEntity;
+    @OneToMany(() => ListEntity, list => list.user)
+    lists: ListEntity[];
 
 
 }

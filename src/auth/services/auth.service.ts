@@ -46,8 +46,8 @@ export class AuthService {
         console.log('password',email)
         return from(
             this.userRepository.findOne({
-                 select: ['id', 'firstName', 'lastName', 'email', 'password'],
-                 where: { email },                
+                select: ['id', 'firstName', 'lastName', 'email', 'password'],
+                where: { email }
             })
 
         ).pipe(
@@ -74,6 +74,7 @@ export class AuthService {
             switchMap((user: User) => {
                 if (user) {
                     //create JWT - credentials
+                    console.log('auth service backend user: ',user)
                     return from(this.jwtService.signAsync({ user }))
                 }
             }),
@@ -84,8 +85,9 @@ export class AuthService {
         console.log('email auth.service line 85: ',email)
         return from(
             this.userRepository.findOne({
-                 select: ['id', 'firstName', 'lastName', 'email', 'password', 'lists'],
-                where: { email },                
+                //  select: ['id', 'firstName', 'lastName', 'email', 'password', 'lists'],
+                where: { email }, 
+                relations: ["lists"]               
             }
             )
             

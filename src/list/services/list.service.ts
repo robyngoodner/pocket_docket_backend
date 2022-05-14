@@ -23,10 +23,12 @@ export class ListService {
         );
     }
 
-    getLists(id: number) {
+    getLists(id) {
+        console.log("list service getLists line 27 id: ", id)
         return (
             this.listRepository.find({
-                select: ['title', 'description', 'id', 'items', 'user'],
+                where: {user: id},
+                // select: ['title', 'description', 'id', 'user'],
             }))
     }
 
