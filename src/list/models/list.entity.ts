@@ -12,8 +12,7 @@ export class ListEntity {
     @ManyToOne(type => UserEntity, user => user.id)
     user: UserEntity;
 
-    @OneToMany(type => ItemEntity, item => item.id)
-    @JoinColumn()
+    @OneToMany(() => ItemEntity, item => item.list)
     items: ItemEntity[];
 
     @Column()

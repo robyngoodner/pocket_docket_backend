@@ -30,11 +30,13 @@ export class ListService {
             }))
     }
 
-    getList(id: number): Observable<List> {
-        return from(
-            this.listRepository.findOne({ 
-                where: {id: id},
-                select: ['title', 'description', 'id', 'items']})
+    getList(id) {
+        // const { id } = id
+        console.log("getlist id: ",id)
+        return (
+            this.listRepository.find({ 
+                where: {id : id},
+                relations: ["items"]})
         )
     }
 

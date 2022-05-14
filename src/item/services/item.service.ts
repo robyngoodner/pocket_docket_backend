@@ -22,7 +22,7 @@ export class ItemService {
         return (
             this.itemRepository.find({ 
                 where: {id: id},
-                select: ['body', 'complete', 'id']
+                //select: ['body', 'complete', 'id', 'list', 'createdAt']
             })
             )
     }

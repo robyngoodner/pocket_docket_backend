@@ -10,8 +10,11 @@ export class ItemEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => ListEntity, list => list.id, {nullable: false})
-    // @JoinColumn()
+    @Column({nullable: true})
+    listId: number;
+
+    @ManyToOne(() => ListEntity, list => list.items, {nullable: false})
+    // @JoinColumn({name: "id_list"})
     list: ListEntity
 
     @Column({nullable: false})

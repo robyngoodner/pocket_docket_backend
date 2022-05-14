@@ -15,9 +15,14 @@ export class ItemController {
     }
 
     @Get ('/:id')
-    findAll(@Param('list') id: number) {
+    find(id: number) {
+        console.log('item controller line 19 id: ',id)
         return this.itemService.getItems(id)
     }
+    // @Get ('/:id')
+    // find(id: number) {
+    //     return this.itemService.getItems(id)
+    // }
 
     @Put(':id/edit')
     update(

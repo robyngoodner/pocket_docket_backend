@@ -15,6 +15,11 @@ export class ListController {
         return this.listService.createList(list)
     }
 
+    @Get ('detail/:id')
+    findOne( @Param('id') id: number) {
+        return this.listService.getList(id)
+    }
+
     @Get (':id')
     findAll(@Param('user') id: number) {
         return this.listService.getLists(id)
