@@ -9,7 +9,7 @@ export class ListEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => UserEntity, user => user.lists)
+    @ManyToOne(() => UserEntity, user => user.lists, { onDelete: 'CASCADE' })
     user: UserEntity;
 
 

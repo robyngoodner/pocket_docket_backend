@@ -13,7 +13,7 @@ export class ItemEntity {
     @Column({nullable: true})
     listId: number;
 
-    @ManyToOne(() => ListEntity, list => list.items, {nullable: false})
+    @ManyToOne(() => ListEntity, list => list.items, {nullable: false, onDelete: 'CASCADE' })
     // @JoinColumn({name: "id_list"})
     list: ListEntity
 

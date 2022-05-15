@@ -37,6 +37,7 @@ export class ListController {
     delete(
         @Param('id') id: number,
     ): Observable<DeleteResult>  {
+        console.log("list.controller delete id: ",id)
         return this.listService.deleteList(id)
     }
 }
