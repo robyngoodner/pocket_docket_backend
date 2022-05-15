@@ -29,7 +29,7 @@ export class ListController {
     update(
         @Param('id') id: number,
         @Body() list: List
-    ):Observable<List> {
+    ):Observable<UpdateResult> {
         return this.listService.updateList(id, list)
     }
 
