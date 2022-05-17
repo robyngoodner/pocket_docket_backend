@@ -28,6 +28,7 @@ export class ItemService {
     }
 
     updateItem(id: number, item: Item): Observable<UpdateResult> {
+        console.log('item: ',item)
         return from(this.itemRepository.update(id, item))
     }
 
